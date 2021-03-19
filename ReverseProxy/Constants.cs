@@ -26,30 +26,10 @@
 
 namespace ReverseProxy
 {
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text.Json.Serialization;
-    using System.Threading.Tasks;
-
-    public class TargetService
+    public static class Constants
     {
-        [JsonProperty("PrimarySegment")]
-        [JsonPropertyName("PrimarySegment")]
-        public string primarySegment { get; set; }
+        public const string Success = "Success";
 
-        public TargetService()
-        {
-        }
-
-        public TargetService(string segment)
-        {
-            this.primarySegment = segment;
-        }
-
-        [JsonProperty("TargetUrl")]
-        [JsonPropertyName("TargetUrl")]
-        public string TargetUrl { get; set; }
+        public const string Failure = "Failure";
     }
 }

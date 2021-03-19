@@ -73,17 +73,10 @@ namespace ReverseProxy
 
             app.UseMiddleware<ReverseProxy>();
 
-            ServicePointManager.ServerCertificateValidationCallback += new RemoteCertificateValidationCallback(ValidateCertificate);
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-        }
-
-        public static bool ValidateCertificate(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)
-        {
-            return true;
         }
     }
 }

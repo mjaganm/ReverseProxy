@@ -24,32 +24,23 @@
  *
  * */
 
-namespace ReverseProxy
+namespace ReverseProxy.Controllers
 {
-    using Newtonsoft.Json;
+    using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text.Json.Serialization;
     using System.Threading.Tasks;
 
-    public class TargetService
+    [Route("[controller]")]
+    [ApiController]
+    public class IsAliveController : ControllerBase
     {
-        [JsonProperty("PrimarySegment")]
-        [JsonPropertyName("PrimarySegment")]
-        public string primarySegment { get; set; }
-
-        public TargetService()
+        // GET: /IsAlive
+        [HttpGet]
+        public string Get()
         {
+            return Constants.Success;
         }
-
-        public TargetService(string segment)
-        {
-            this.primarySegment = segment;
-        }
-
-        [JsonProperty("TargetUrl")]
-        [JsonPropertyName("TargetUrl")]
-        public string TargetUrl { get; set; }
     }
 }
