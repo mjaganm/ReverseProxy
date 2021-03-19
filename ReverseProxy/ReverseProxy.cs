@@ -46,7 +46,7 @@ namespace ReverseProxy
 
         private RequestDelegate nextMiddleWare;
 
-        private ConcurrentDictionary<string, TargetService> primarySegmentDictionary = new ConcurrentDictionary<string, TargetService>();
+        internal static ConcurrentDictionary<string, TargetService> primarySegmentDictionary = new ConcurrentDictionary<string, TargetService>();
 
         public ReverseProxy(RequestDelegate nextMiddleWare)
         {
@@ -60,13 +60,19 @@ namespace ReverseProxy
 
             Console.WriteLine("This is:" + primarySegment);
 
+            /*
             TargetService s = new TargetService("weatherforecast");
-            s.TargetUrl = "https://localhost:5001";
+            s.TargetUrl = "https://localhost:7001";
+
+            TargetService s1 = new TargetService("jagan");
+            s1.TargetUrl = "https://localhost:7001";
 
             primarySegmentDictionary["weatherforecast"] = s;
+            primarySegmentDictionary["jagan"] = s1;
+            */
 
             TargetService service;
-            if (!this.primarySegmentDictionary.TryGetValue(primarySegment, out service))
+            if (!ReverseProxy.primarySegmentDictionary.TryGetValue(primarySegment, out service))
             {
                 await nextMiddleWare(context);
 
