@@ -1,5 +1,5 @@
 # ReverseProxy
-ReverseProxy for Kubernetes
+Kubernetes Ingress-Controller using Kestrel based ReverseProxy.
 
 
 
