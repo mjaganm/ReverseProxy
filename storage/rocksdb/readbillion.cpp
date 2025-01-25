@@ -82,7 +82,7 @@ int main() {
         std::cout << "Retrieved key: jagan: " << value << std::endl;
     }
 
-    if (DeleteKey(db, "key1")) {
+    if (DeleteKey(db, "jagan")) {
         std::cout << "Successfully deleted key: jagan" << std::endl;
     }
 
