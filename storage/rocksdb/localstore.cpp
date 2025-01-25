@@ -1,10 +1,7 @@
-#include <rocksdb/db.h>
-#include <rocksdb/options.h>
-#include <iostream>
-#include <string>
+#include "localstore.h"
 
 // Function to initialize the RocksDB instance
-std::unique_ptr<rocksdb::DB> InitializeDB(const std::string& db_path, const rocksdb::Options& options) {
+std::unique_ptr<rocksdb::DB> localstore::InitializeDB(const std::string& db_path, const rocksdb::Options& options) {
     std::unique_ptr<rocksdb::DB> db;
     rocksdb::Status status = rocksdb::DB::Open(options, db_path, &db);
     if (!status.ok()) {
@@ -15,7 +12,7 @@ std::unique_ptr<rocksdb::DB> InitializeDB(const std::string& db_path, const rock
 }
 
 // Function to put a key-value pair into the database
-bool PutKeyValue(std::unique_ptr<rocksdb::DB>& db, const std::string& key, const std::string& value) {
+bool localstore::PutKeyValue(std::unique_ptr<rocksdb::DB>& db, const std::string& key, const std::string& value) {
     rocksdb::Status status = db->Put(rocksdb::WriteOptions(), key, value);
     if (!status.ok()) {
         std::cerr << "Error putting key-value: " << status.ToString() << std::endl;
@@ -25,7 +22,7 @@ bool PutKeyValue(std::unique_ptr<rocksdb::DB>& db, const std::string& key, const
 }
 
 // Function to get a value by key from the database
-bool GetValue(std::unique_ptr<rocksdb::DB>& db, const std::string& key, std::string& value) {
+bool localstore::GetValue(std::unique_ptr<rocksdb::DB>& db, const std::string& key, std::string& value) {
     rocksdb::Status status = db->Get(rocksdb::ReadOptions(), key, &value);
     if (!status.ok()) {
         if (status.IsNotFound()) {
@@ -39,7 +36,7 @@ bool GetValue(std::unique_ptr<rocksdb::DB>& db, const std::string& key, std::str
 }
 
 // Function to delete a key-value pair from the database
-bool DeleteKey(std::unique_ptr<rocksdb::DB>& db, const std::string& key) {
+bool localstore::DeleteKey(std::unique_ptr<rocksdb::DB>& db, const std::string& key) {
     rocksdb::Status status = db->Delete(rocksdb::WriteOptions(), key);
     if (!status.ok()) {
         std::cerr << "Error deleting key: " << status.ToString() << std::endl;
@@ -48,9 +45,7 @@ bool DeleteKey(std::unique_ptr<rocksdb::DB>& db, const std::string& key) {
     return true;
 }
 
-
-
-int main() {
+int localstore::run() {
     const std::string kDBPath = "./testdb";
 
     // Configure RocksDB options
@@ -98,4 +93,3 @@ int main() {
 
     return 0;
 }
-

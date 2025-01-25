@@ -9,6 +9,6 @@ RocksDB setup:
 2. cd rocksdb/; make shared_lib
 3. sudo make install
 
-g++ -std=c++17 -o rocksdb_app writebillion.cpp -lrocksdb -lpthread -lsnappy -lz -lbz2 -llz4 -lzstd
+g++ -std=c++17 -o rocksdb_app programmain.cpp localstore.cpp  -lrocksdb -lpthread -lsnappy -lz -lbz2 -llz4 -lzstd
 
 
