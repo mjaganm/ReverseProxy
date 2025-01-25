@@ -1,0 +1,14 @@
+
+Basic setup:
+ - sudo apt-get update
+ - sudo apt-get install -y build-essential cmake libsnappy-dev zlib1g-dev libbz2-dev liblz4-dev libzstd-dev
+
+RocksDB setup:
+
+1. git clone https://github.com/facebook/rocksdb.git
+2. cd rocksdb/; make shared_lib
+3. sudo make install
+
+g++ -std=c++17 -o rocksdb_app writebillion.cpp -lrocksdb -lpthread -lsnappy -lz -lbz2 -llz4 -lzstd
+
+
